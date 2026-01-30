@@ -16,8 +16,10 @@ app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
 // CORS configuration
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://10.0.2.2:3000'], // React Native Android emulator
-    credentials: true
+    origin: '*', // Allow all origins (safe for API)
+    credentials: false,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 // Connect to MongoDB
