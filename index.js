@@ -60,13 +60,18 @@ app.use((err, req, res, next) => {
     });
 });
 
-// Start server
-app.listen(PORT, () => {
-    console.log('');
-    console.log('='.repeat(50));
-    console.log(`✓ Server running on port ${PORT}`);
-    console.log(`✓ Environment: ${process.env.NODE_ENV || 'development'}`);
-    console.log(`✓ API Base: http://localhost:${PORT}`);
-    console.log('='.repeat(50));
-    console.log('');
-});
+// Start server for local development
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log('');
+        console.log('='.repeat(50));
+        console.log(`✓ Server running on port ${PORT}`);
+        console.log(`✓ Environment: ${process.env.NODE_ENV || 'development'}`);
+        console.log(`✓ API Base: http://localhost:${PORT}`);
+        console.log('='.repeat(50));
+        console.log('');
+    });
+}
+
+// Export for Vercel serverless
+module.exports = app;
